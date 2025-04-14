@@ -25,7 +25,14 @@ M.setup = function(client, bufnr)
     buffer = bufnr,
     callback = function()
       if check_triggeredChars(triggerChars) then
-        vim.lsp.buf.signature_help { focus = false, silent = true, max_height = 7 }
+        local max_height = vim.fn.screenrow() == vim.o.scrolloff + 1 and vim.o.scrolloff - 1 or 8
+        vim.lsp.buf.signature_help {
+          anchor_bias = "above",
+          focus = false,
+          silent = true,
+          max_height = max_height,
+          max_width = math.floor(vim.o.columns * 0.4),
+        }
       end
     end,
   })

@@ -41,4 +41,5 @@ return {
   Codeium = "",
   TabNine = "",
   BladeNav = "",
+  Marscode = "󰑣",
 }

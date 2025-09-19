@@ -118,11 +118,13 @@ end
 
 M.lsp = function()
   if rawget(vim, "lsp") then
+    local clients = {}
     for _, client in ipairs(vim.lsp.get_clients()) do
       if client.attached_buffers[M.stbufnr()] then
-        return (vim.o.columns > 100 and "   LSP ~ " .. client.name .. " ") or "   LSP "
+        table.insert(clients, client.name)
       end
     end
+    return (vim.o.columns > 100 and "   LSP ~ " .. table.concat(clients, ", ") .. " ") or "   LSP "
   end
 
   return ""
